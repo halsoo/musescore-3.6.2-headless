@@ -24,7 +24,12 @@ cd musescore-3.6.2-headless
 1. Downloads [MuseScore 3.6.2 AppImage](https://github.com/musescore/MuseScore/releases/download/v3.6.2/MuseScore-3.6.2.548021370-x86_64.AppImage)
 1. Extracts the downloaded AppImage to `$HOME/mscore-3.6.2/`
 1. Tests the extracted AppImage
-1. Copies `wrapper_command.sh` to `/usr/local/bin/musescore` and `/usr/local/bin/mscore`
+1. Copies `wrapper_command.sh` to following paths
+    ```
+    /usr/bin/musescore
+    /usr/bin/mscore -> /usr/bin/musescore
+    /usr/bin/mscore3 -> /usr/bin/musescore
+    ```
 1. Tests the copied commands
 
 <br>

@@ -34,7 +34,8 @@ if ! command -v xvfb-run &> /dev/null; then
 fi
 
 # Run MuseScore with xvfb-run, passing all arguments
-xvfb-run -a "$MUSESCORE_APPRUN" "$@"
+# explicitly unset QT_QPA_PLATFORM to avoid conflicts
+env -u QT_QPA_PLATFORM xvfb-run -a "$MUSESCORE_APPRUN" "$@"
 EXIT_CODE=$?
 
 # Store the xvfb-run PID for cleanup (though xvfb-run handles its own cleanup)

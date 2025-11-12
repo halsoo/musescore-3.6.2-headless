@@ -86,8 +86,8 @@ check_existing_installation() {
     found=1
   fi
   
-  if [ -f "/usr/local/bin/musescore" ]; then
-    print_warning "Found existing command: /usr/local/bin/musescore"
+  if [ -f "//local/bin/musescore" ]; then
+    print_warning "Found existing command: /usr/bin/musescore"
     found=1
   fi
   
@@ -236,19 +236,25 @@ install_wrapper() {
   chmod +x "$WRAPPER_SCRIPT" || error_exit "Failed to make wrapper script executable"
   print_success "Wrapper script is now executable"
   
-  print_info "Copying wrapper to /usr/local/bin/musescore..."
-  if sudo cp "$WRAPPER_SCRIPT" /usr/local/bin/musescore; then
-    print_success "Copied to /usr/local/bin/musescore"
+  print_info "Copying wrapper to /usr/bin/musescore..."
+  if sudo cp "$WRAPPER_SCRIPT" /usr/bin/musescore; then
+    print_success "Copied to /usr/bin/musescore"
   else
     error_exit "Failed to copy wrapper script"
   fi
   
   print_info "Creating symlink for 'mscore' command..."
-  sudo rm -f /usr/local/bin/mscore 2>/dev/null
-  if sudo ln -s /usr/local/bin/musescore /usr/local/bin/mscore; then
-    print_success "Created symlink: /usr/local/bin/mscore"
+  sudo rm -f /usr/bin/mscore 2>/dev/null
+  if sudo ln -s /usr/bin/musescore /usr/bin/mscore; then
+    print_success "Created symlink: /usr/bin/mscore"
   else
-    error_exit "Failed to create symlink"
+    error_exit "Failed to create symlink: /usr/bin/mscore"
+  fi
+  sudo rm -f /usr/bin/mscore3 2>/dev/null
+  if sudo ln -s /usr/bin/musescore /usr/bin/mscore3; then
+    print_success "Created symlink: /usr/bin/mscore3"
+  else
+    error_exit "Failed to create symlink: /usr/bin/mscore3"
   fi
   echo ""
 }
@@ -268,14 +274,14 @@ verify_installation() {
   fi
   
   # Check wrapper commands
-  if [ -f "/usr/local/bin/musescore" ]; then
+  if [ -f "/usr/bin/musescore" ]; then
     print_success "Command available: musescore"
   else
     print_error "Command not found: musescore"
     issues=$((issues + 1))
   fi
   
-  if [ -L "/usr/local/bin/mscore" ]; then
+  if [ -L "/usr/bin/mscore" ]; then
     print_success "Command available: mscore"
   else
     print_error "Command not found: mscore"

@@ -12,7 +12,7 @@ NC='\033[0m' # No Color
 
 # Configuration
 MUSESCORE_DIR="$HOME/mscore-3.6.2"
-WRAPPER_PATHS=("/usr/local/bin/musescore" "/usr/local/bin/mscore")
+WRAPPER_PATHS=("/usr/bin/musescore" "/usr/bin/mscore" "/usr/bin/mscore3" )
 
 echo "=================================================="
 echo "MuseScore 3.6.2 Headless Mode Uninstaller"
@@ -203,7 +203,7 @@ main() {
   validate_sudo
   
   echo "This script will remove:"
-  echo "  1. Wrapper commands (/usr/local/bin/musescore, /usr/local/bin/mscore)"
+  echo "  1. Wrapper commands (/usr/bin/musescore, /usr/bin/mscore)"
   echo "  2. Extracted MuseScore directory ($MUSESCORE_DIR)"
   echo "  3. (Optional) Downloaded AppImage file"
   echo "  4. (Optional) Installed dependencies"
